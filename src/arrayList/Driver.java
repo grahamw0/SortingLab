@@ -22,7 +22,7 @@ public class Driver {
     }
     list.add(0);
     list.add(0);
-    list.selectionSort();
+    list.insertionSort();
     
     for(Comparable c : list.toArray()) {
       System.out.print(c + " ");
