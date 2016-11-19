@@ -12,12 +12,10 @@ import java.util.Arrays;
  * @version 10/2/2016
  *
  */
-public class ListArray<T> {
+public class ListArray {
 
   private int size; // The current size
-  private T[] array; // The array
-  @SuppressWarnings("rawtypes")
-  private final Class c; // A class object
+  private Comparable[] array; // The array
 
   /**
    * Constructor for class ListArray. When creating an instance of this class it will set the size
@@ -27,10 +25,9 @@ public class ListArray<T> {
    * @param c
    */
   @SuppressWarnings("unchecked")
-  public ListArray(Class<T> c) {
+  public ListArray() {
     this.size = 0;
-    this.c = c;
-    array = (T[]) Array.newInstance(this.c, 10);
+    array = (Comparable[]) Array.newInstance(Comparable.class, 10);
   }
 
   /**
@@ -41,7 +38,7 @@ public class ListArray<T> {
    * @param object.
    * @return boolean
    */
-  public boolean add(int index, T o) {
+  public boolean add(int index, Comparable o) {
     checkBound(index);
     ensureArraySpace();
     this.array[size] = o;
@@ -58,7 +55,7 @@ public class ListArray<T> {
    * @return boolean
    */
 
-  public boolean add(T o) {
+  public boolean add(Comparable o) {
     // Check to see if there is space in the array. If not create a copy and double the size.
     ensureArraySpace();
     this.array[size] = o;
@@ -76,7 +73,7 @@ public class ListArray<T> {
   public boolean clear() {
     // Create a new instance of an array and set it to the current array. This will clear the
     // current.
-    this.array = (T[]) Array.newInstance(c, 10);
+    this.array = (Comparable[]) Array.newInstance(Comparable.class, 10);
     this.size = 0; // Reset size to 0
     return true;
   }
@@ -88,7 +85,7 @@ public class ListArray<T> {
    * @return boolean
    */
 
-  public boolean contains(T o) {
+  public boolean contains(Comparable o) {
     if (array[0] == null) { // return false if the list is empty.
       return false;
     }
@@ -110,9 +107,10 @@ public class ListArray<T> {
    * @return T Retrieve the element at the index
    */
 
-  public T get(int index) {
+  public Comparable get(int index) {
     checkBound(index);
-    return (T) array[index]; // If there is no exception return the element at the specified index.
+    return (Comparable) array[index]; // If there is no exception return the element at the
+                                      // specified index.
 
   }
 
@@ -124,7 +122,7 @@ public class ListArray<T> {
    * @return The index or -1 if it does not exist
    */
 
-  public int indexOf(T o) {
+  public int indexOf(Comparable o) {
     for (int i = 0; i < size; i++) {
       if (array[i] == o) { // If the element is in the list then return the index.
         return i;
@@ -151,9 +149,10 @@ public class ListArray<T> {
    * @return the deleted data
    */
 
-  public T remove(int index) {
+  public Comparable remove(int index) {
     checkBound(index);
-    T returnObject = array[index]; // Get the element at the index and set it to a variable.
+    Comparable returnObject = array[index]; // Get the element at the index and set it to a
+                                            // variable.
     for (int i = index; i < size - 1; i++) { // Starting at the index position
       array[i] = array[i + 1]; // Shift all elements after the index left.
     }
@@ -171,10 +170,10 @@ public class ListArray<T> {
    */
   @SuppressWarnings("unchecked")
 
-  public T remove(Object o) {
-    int index = indexOf((T) o); // Get the element and its index.
+  public Comparable remove(Object o) {
+    int index = indexOf((Comparable) o); // Get the element and its index.
     remove(index); // Remove that index
-    return (T) o; // Return the deleted data.
+    return (Comparable) o; // Return the deleted data.
   }
 
   /**
@@ -190,7 +189,7 @@ public class ListArray<T> {
 
   public boolean set(int index, Object element) {
     checkBound(index);
-    array[index] = (T) element; // Set the element at the specified index.
+    array[index] = (Comparable) element; // Set the element at the specified index.
     return true;
   }
 
@@ -215,11 +214,11 @@ public class ListArray<T> {
    */
   @SuppressWarnings({"unchecked", "rawtypes"})
 
-  public ListArray<T> subList(int fromIndex, int toIndex) {
+  public ListArray subList(int fromIndex, int toIndex) {
     checkBound(fromIndex);
     checkBound(toIndex);
 
-    ListArray newList = new ListArray<>(c); // Create a new array to copy to.
+    ListArray newList = new ListArray(); // Create a new array to copy to.
     newList.setArray(Arrays.copyOfRange(array, fromIndex, toIndex)); // Grab the elements within the
                                                                      // range.
     newList.size = toIndex - fromIndex; // Update the list size.
@@ -234,8 +233,10 @@ public class ListArray<T> {
    */
   @SuppressWarnings("unchecked")
 
-  public T[] toArray() {
-    T[] newArray = (T[]) Array.newInstance(this.c, size); // Create a new array to copy to.
+  public Comparable[] toArray() {
+    Comparable[] newArray = (Comparable[]) Array.newInstance(Comparable.class, size); // Create a
+                                                                                      // new array
+                                                                                      // to copy to.
     for (int i = 0; i < size; i++) {
       newArray[i] = array[i]; // Shift the elements from the array to the new one.
     }
@@ -254,7 +255,7 @@ public class ListArray<T> {
   public boolean swap(int position1, int position2) {
     checkBound(position1);
     checkBound(position2);
-    T temp = array[position1]; // Load position1 data into a temporary
+    Comparable temp = array[position1]; // Load position1 data into a temporary
     array[position1] = array[position2]; // Load position2 data into postition1
     array[position2] = temp; // Load the temp into position2
 
@@ -273,7 +274,7 @@ public class ListArray<T> {
 
   public boolean shift(int positions) {
     positions *= -1; // Fixes the opposite result
-    T[] newArray = (T[]) new Object[size];
+    Comparable[] newArray = (Comparable[]) new Object[size];
     if (positions > 0) { // If positions is positive
       int j = 0;
       for (int i = positions; i < size; i++) { // Start iterating at positions
@@ -307,7 +308,7 @@ public class ListArray<T> {
    * 
    * @param array
    */
-  public void setArray(T[] array) {
+  public void setArray(Comparable[] array) {
     this.array = array;
   }
 
@@ -332,6 +333,21 @@ public class ListArray<T> {
   private void checkBound(int index) {
     if (index < 0 || index > size - 1) {
       throw new IndexOutOfBoundsException("Index is invalid");
+    }
+  }
+
+  public void bubbleSort() {
+    boolean swap = true;
+    while (swap) {
+      swap = false;
+      for (int i = 0; i < size - 1; i++) {
+        if (array[i].compareTo(array[i+1]) > 0) {
+          Comparable temp = array[i];
+          array[i] = array[i+1];
+          array[i+1] = temp;
+          swap = true;
+        }
+      }
     }
   }
 
