@@ -3,6 +3,8 @@ package heap;
 import java.util.LinkedList;
 import java.util.Queue;
 
+import arrayList.ListArray;
+
 /**
  * Implementation of a min-heap.
  * 
@@ -293,6 +295,19 @@ public class Heap {
     }
     System.out.println();
 
+  }
+
+  public static ListArray heapSort(ListArray array) {
+    Heap heap = new Heap();
+    ListArray list = new ListArray();
+    for (Comparable c : array.toArray()) {
+      heap.insert(c);
+    }
+    for (int i = 0; i < array.size() && !heap.isEmpty(); i++) {
+      list.add(heap.findMin());
+      heap.deleteMin();
+    }
+    return list;
   }
 
 }
