@@ -341,13 +341,25 @@ public class ListArray {
     while (swap) {
       swap = false;
       for (int i = 0; i < size - 1; i++) {
-        if (array[i].compareTo(array[i+1]) > 0) {
+        if (array[i].compareTo(array[i + 1]) > 0) {
           Comparable temp = array[i];
-          array[i] = array[i+1];
-          array[i+1] = temp;
+          array[i] = array[i + 1];
+          array[i + 1] = temp;
           swap = true;
         }
       }
+    }
+  }
+
+  public void selectionSort() {
+    for (int i = 0; i < size; i++) {
+      int min = i;
+      for (int j = i; j < size; j++) {
+        if (array[min].compareTo(array[j]) > 0) {
+          min = j;
+        }
+      }
+      swap(i, min);
     }
   }
 
