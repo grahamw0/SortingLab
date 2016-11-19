@@ -351,6 +351,7 @@ public class ListArray {
     }
   }
 
+  // Not needed.
   public void selectionSort() {
     for (int i = 0; i < size; i++) {
       int min = i;
@@ -360,6 +361,18 @@ public class ListArray {
         }
       }
       swap(i, min);
+    }
+  }
+  
+  public void insertionSort() {
+    for(int i = 1; i < size; i++) {
+      int j = i;
+      Comparable c = array[i];
+      while((j > 0) && array[j-1].compareTo(c) > 0) {
+        array[j] = array[j-1];
+        j--;
+      }
+      array[j] = c;
     }
   }
 
