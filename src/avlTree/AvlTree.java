@@ -2,6 +2,8 @@ package avlTree;
 
 import java.util.ArrayList;
 
+import arrayList.ListArray;
+
 /**
  * Implementation of a reference based AVL Tree.
  * 
@@ -375,8 +377,8 @@ public class AvlTree {
    * @param tree The tree to convert into a list
    * @return The list with all values in In-Order format
    */
-  public static ArrayList<Comparable> inOrder(AvlTree tree) {
-    ArrayList<Comparable> list = new ArrayList<>();
+  public static ListArray inOrder(AvlTree tree) {
+    ListArray list = new ListArray();
     AvlTree.inOrderRecurs(list, tree.root);
     return list;
   }
@@ -387,7 +389,7 @@ public class AvlTree {
    * @param list The list data are to be added to
    * @param node The current node being looked at (initial call should be on root)
    */
-  private static void inOrderRecurs(ArrayList<Comparable> list, AvlNode node) {
+  private static void inOrderRecurs(ListArray list, AvlNode node) {
     if (node == null)
       return;
     inOrderRecurs(list, node.getLeft());
@@ -428,5 +430,14 @@ public class AvlTree {
     } else {
       return countRecur(node.getLeft(), x0, x1);
     }
+  }
+  
+  public static ListArray treeSort(ListArray array) {
+    AvlTree tree = new AvlTree();
+    for(Comparable c : array.toArray()) {
+      tree.insert(c);
+    }
+    return inOrder(tree);
+    
   }
 }
