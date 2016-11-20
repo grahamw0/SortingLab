@@ -20,9 +20,11 @@ public class Driver {
     for(int i = 0; i < 20; i++) {
       list.add(rand.nextInt(100));
     }
-    list.add(0);
-    list.add(0);
-    list.insertionSort();
+    //list.add(0);
+    //list.add(0);
+    //list.insertionSort();
+    list.partitionArray(50);
+    
     
     for(Comparable c : list.toArray()) {
       System.out.print(c + " ");

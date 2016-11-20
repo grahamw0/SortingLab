@@ -375,5 +375,25 @@ public class ListArray {
       array[j] = c;
     }
   }
+  
+  public void partitionArray(Comparable pivot){
+    int leftPointer = -1; // Starts at the left side of the array before index 0
+    int rightPointer = size; // Starts at the right side of the array after the last index
+    Comparable lp = leftPointer;
+    Comparable rp = rightPointer;
+    while(true){
+      // Cycle through until the end is reached or an item bigger than the pivot is found. 
+      // Then wait for the righPointer to finish cycling.
+      while(lp.compareTo(size -1) < 0 && array[++leftPointer].compareTo(pivot) < 0);
+      
+      while(rp.compareTo(0) > 0 && array[--rightPointer].compareTo(pivot) > 0);
+      if(leftPointer >= rightPointer) break;
+      else{
+        swap(leftPointer, rightPointer);
+      }
+    }
+    
+  }
+  
 
 }
