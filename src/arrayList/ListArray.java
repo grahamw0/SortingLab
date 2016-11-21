@@ -376,7 +376,13 @@ public class ListArray {
     }
   }
   
-  public void partitionArray(Comparable pivot){
+  /**
+   * Not needed.  This was just an example on how the pivot works.
+   * All numbers larger than the pivot get sorted on the right, and 
+   * all numbers smaller than the pivot get sorted on the left. 
+   * @param pivot
+   */
+  public void partitionArrayExample(Comparable pivot){
     int leftPointer = -1; // Starts at the left side of the array before index 0
     int rightPointer = size; // Starts at the right side of the array after the last index
     Comparable lp = leftPointer;
@@ -394,6 +400,58 @@ public class ListArray {
     }
     
   }
+  
+  /**
+   * 
+   * @param left
+   * @param right
+   */
+  public void quickSort(int left, int right){
+    Comparable rs = right;
+    Comparable ls = left;
+    if(rs.compareTo(ls) <= 0)
+      return; // If everything is sorted
+    else{ // The value of the pivot must be in the array
+      Comparable pivot = array[right];
+      int pivotLocation = partitionArray(left, right, pivot);
+      quickSort(left, pivotLocation - 1); // sorts the left side
+      quickSort(pivotLocation + 1, right);
+    }
+  }
+  
+  /**
+   * If the leftPointer finds an item that is greater than the pivot it stops
+   * and waits for the rightPointer to find a value less than the pivot. Then,
+   * the items are switched.
+   * @param left
+   * @param right
+   * @param pivot
+   * @return
+   */
+  public int partitionArray(int left, int right, Comparable pivot){
+    // Starts at the left side of the array before index 0
+    int leftPointer = left -1;
+    // Starts at the right side of the array after the last index
+    int rightPointer = right;
+    Comparable lp = leftPointer;
+    Comparable rp = rightPointer;
+    while(true){
+      // Cycle through array until the end is reached or an item bigger than the pivot
+      // is found.  Then wait for rightPointer to finish cycling.  
+      while(array[++leftPointer].compareTo(pivot) < 0);
+      while(rp.compareTo(0) > 0 && array[--rightPointer].compareTo(pivot) > 0);
+      // When the 2 pointers meet at the middle break out of the while loop.
+      if(leftPointer >= rightPointer){
+        break;
+      } else {
+        swap(leftPointer, rightPointer);
+      }
+    }
+    // Swap the values 
+    swap(leftPointer, right);
+    return leftPointer;
+  }
+ 
   
 
 }

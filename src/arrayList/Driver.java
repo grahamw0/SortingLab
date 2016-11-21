@@ -23,12 +23,15 @@ public class Driver {
     //list.add(0);
     //list.add(0);
     //list.insertionSort();
-    list.partitionArray(50);
+    //list.partitionArrayExample(50);
+    list.quickSort(0, 19);
     
     
     for(Comparable c : list.toArray()) {
       System.out.print(c + " ");
     }
+    System.out.println("");
+    System.out.println("Ryan is the man!!!!");
 
   }
 
