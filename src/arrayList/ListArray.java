@@ -2,6 +2,7 @@ package arrayList;
 
 import java.lang.reflect.Array;
 import java.util.Arrays;
+import java.util.Stack;
 
 /**
  * Class ListArray<T> will create an array-based list and is one of the 3 generic list classes that
@@ -377,12 +378,11 @@ public class ListArray {
   }
   
   public void quickSortRecursive() {
-    //quickSortRecurs(0, size - 1);
-    quickSortNew(0, size - 1);
+    quickSortRecurs(0, size - 1);
   }
   
  
-  private void quickSortNew(int lower, int higher) {
+  private void quickSortRecurs(int lower, int higher) {
    if(higher <= lower || lower >= higher)
      return;
    
@@ -398,9 +398,52 @@ public class ListArray {
    array[lower] = array[i-1];
    array[i - 1] = pivot;
    
-   quickSortNew(lower, i-2);
-   quickSortNew(i, higher);
+   quickSortRecurs(lower, i-2);
+   quickSortRecurs(i, higher);
    
+  }
+  
+  public void quickSortIterative() {
+    Stack<Integer> stack = new Stack<>();
+    stack.push(0);
+    stack.push(size);
+    while(!stack.isEmpty()) {
+      int end = stack.pop();
+      int start = stack.pop();
+      if(end - start < 2)
+        continue;
+      int p = start + ((end - start) / 2);
+      p = partition(p, start, end);
+      
+      stack.push(p+1);
+      stack.push(end);
+      
+      stack.push(start);
+      stack.push(p);
+    }
+  }
+  
+  private int partition(int pivot, int start, int end) {
+    int l = start;
+    int h = end - 2;
+    Comparable pivObj = array[pivot];
+    swap(pivot, end - 1);
+    
+    while(l < h) {
+      if(array[l].compareTo(pivObj) < 0)
+        l++;
+      else if (array[h].compareTo(pivObj) >= 0)
+        h--;
+      else
+        swap(l,h);
+    }
+    
+    int index = h;
+    if(array[h].compareTo(pivObj) < 0)
+      index++;
+    
+    swap(end - 1, index);
+    return index;
   }
   
 
