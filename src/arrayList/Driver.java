@@ -18,17 +18,17 @@ public class Driver {
     Random rand = new Random(666);
     ListArray list = new ListArray();
     for(int i = 0; i < 20; i++) {
-      list.add(rand.nextInt(100));
+      list.add(rand.nextInt());
     }
     //list.add(0);
     //list.add(0);
     //list.insertionSort();
     //list.partitionArrayExample(50);
-    list.quickSort(0, 19);
+    list.quickSortIterative();
     
     
     for(Comparable c : list.toArray()) {
-      System.out.print(c + " ");
+      System.out.println(c + " ");
     }
     System.out.println("");
     System.out.println("Ryan is the man!!!!");

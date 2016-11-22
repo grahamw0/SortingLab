@@ -446,5 +446,13 @@ public class ListArray {
     return index;
   }
   
+  public void bucketSort(int numOfBuckets) {
+    ListArray[] buckets = new ListArray[numOfBuckets];
+
+    for (int i = 0; i < size; i++) {
+      
+    }
+  }
+  
 
 }
