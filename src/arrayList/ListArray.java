@@ -4,6 +4,8 @@ import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Stack;
 
+import com.sun.xml.internal.messaging.saaj.util.TeeInputStream;
+
 /**
  * Class ListArray<T> will create an array-based list and is one of the 3 generic list classes that
  * implement MyList. This class is responsible for creating the array-based list that class
@@ -446,13 +448,73 @@ public class ListArray {
     return index;
   }
   
-  public void bucketSort(int numOfBuckets) {
-    ListArray[] buckets = new ListArray[numOfBuckets];
-
-    for (int i = 0; i < size; i++) {
-      
+  public void mergeSort() {
+    Comparable[] tempArray = new Comparable[size];
+    mergeSortRecurs(0, size - 1, tempArray);
+  }
+  
+  private void mergeSortRecurs(int lower, int higher, Comparable[] tempArray) {
+    if (lower < higher) {  // Only runs recursively when indices != or out of order
+      int middle = lower + (higher - lower) / 2;
+      mergeSortRecurs(lower, middle, tempArray);
+      mergeSortRecurs(middle + 1, higher, tempArray);
+      mergeParts(lower, middle, higher, tempArray);
     }
   }
   
+  private void mergeParts(int lower, int middle, int higher, Comparable[] tempArray) {
+    for(int i = lower; i <= higher; i++) {
+      tempArray[i] = array[i];
+    }
+    int i = lower;
+    int j = middle + 1;
+    int k = lower;
+    
+    while(i <= middle && j <= higher) {
+      if(tempArray[i].compareTo(tempArray[j]) <= 0) {
+        array[k] = tempArray[i];
+        i++;
+      } else {
+        array[k] = tempArray[j];
+        j++;
+      }
+      k++;
+    }
+    while(i <= middle) {
+      array[k] = tempArray[i];
+      k++;
+      i++;
+    }
+  }
+  
+  public void radixSort() {
+    int i, m = (int)array[0];
+    int exp = 1;
+    
+    int[] b = new int[10];
+    for(i = 1; i < size; i++) {
+      if((int)array[i] > m) {
+        m = (int)array[i];
+      }
+    }
+    while(m / exp > 0) {
+      int[] bucket = new int[10];
+      
+      for(i = 0; i < size; i++) {
+        System.out.println(((int)array[i] / exp) % 10);
+        bucket[((int)array[i] / exp) % 10]++;
+      }
+      for(i = 1; i < 10; i++) {
+        bucket[i] += bucket[i - 1];
+      }
+      for(i = size - 1; i >= 0; i--) {
+        b[--bucket[((int)array[i] / exp) % 10]] = (int)array[i];
+      }
+      for(i = 0; i < size; i++) {
+        array[i] = b[i];
+      }
+      exp *= 10;
+    }
+  }
 
 }
