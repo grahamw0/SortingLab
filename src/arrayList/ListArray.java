@@ -2,9 +2,9 @@ package arrayList;
 
 import java.lang.reflect.Array;
 import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Stack;
-
-import com.sun.xml.internal.messaging.saaj.util.TeeInputStream;
 
 /**
  * Class ListArray<T> will create an array-based list and is one of the 3 generic list classes that
@@ -488,33 +488,32 @@ public class ListArray {
   }
   
   public void radixSort() {
-    int i, m = (int)array[0];
-    int exp = 1;
+    boolean cont = true;
+    long divisor = 1L;
+    Queue[] buckets = new LinkedList[10];
+    for(int i = 0; i < 10; i++) {
+      buckets[i] = new LinkedList();
+    }
     
-    int[] b = new int[10];
-    for(i = 1; i < size; i++) {
-      if((int)array[i] > m) {
-        m = (int)array[i];
+    while(cont) {
+      cont = false;
+      for(int i = 0; i < size; i++) {
+        long hashIndex = ((int)array[i] / divisor) % 10;
+        if(hashIndex > 0) {
+          cont = true;
+        }
+        buckets[(int)hashIndex].add(new Integer((Integer)array[i]));
+      }
+      divisor *= 10;
+      int i = 0;
+      for(int j = 0; j < 10; j++) {
+        while(!buckets[j].isEmpty()) {
+          Integer ival = (Integer) buckets[j].poll();
+          array[i++] = ival.intValue();
+        }
       }
     }
-    while(m / exp > 0) {
-      int[] bucket = new int[10];
-      
-      for(i = 0; i < size; i++) {
-        System.out.println(((int)array[i] / exp) % 10);
-        bucket[((int)array[i] / exp) % 10]++;
-      }
-      for(i = 1; i < 10; i++) {
-        bucket[i] += bucket[i - 1];
-      }
-      for(i = size - 1; i >= 0; i--) {
-        b[--bucket[((int)array[i] / exp) % 10]] = (int)array[i];
-      }
-      for(i = 0; i < size; i++) {
-        array[i] = b[i];
-      }
-      exp *= 10;
-    }
+    
   }
 
 }
