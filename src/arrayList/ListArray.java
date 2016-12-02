@@ -366,112 +366,112 @@ public class ListArray {
       swap(i, min);
     }
   }
-  
+
   public void insertionSort() {
-    for(int i = 1; i < size; i++) {
+    for (int i = 1; i < size; i++) {
       int j = i;
       Comparable c = array[i];
-      while((j > 0) && array[j-1].compareTo(c) > 0) {
-        array[j] = array[j-1];
+      while ((j > 0) && array[j - 1].compareTo(c) > 0) {
+        array[j] = array[j - 1];
         j--;
       }
       array[j] = c;
     }
   }
-  
+
   public void quickSortRecursive() {
     quickSortRecurs(0, size - 1);
   }
-  
- 
+
+
   private void quickSortRecurs(int lower, int higher) {
-   if(higher <= lower || lower >= higher)
-     return;
-   
-   Comparable pivot = array[lower];
-   int i = lower + 1;
-   
-   for(int j = lower + 1; j <= higher; j++) {
-     if(pivot.compareTo(array[j]) > 0) {
-       swap(j, i);
-       i++;
-     }
-   }
-   array[lower] = array[i-1];
-   array[i - 1] = pivot;
-   
-   quickSortRecurs(lower, i-2);
-   quickSortRecurs(i, higher);
-   
+    if (higher <= lower || lower >= higher)
+      return;
+
+    Comparable pivot = array[lower];
+    int i = lower + 1;
+
+    for (int j = lower + 1; j <= higher; j++) {
+      if (pivot.compareTo(array[j]) > 0) {
+        swap(j, i);
+        i++;
+      }
+    }
+    array[lower] = array[i - 1];
+    array[i - 1] = pivot;
+
+    quickSortRecurs(lower, i - 2);
+    quickSortRecurs(i, higher);
+
   }
-  
+
   public void quickSortIterative() {
     Stack<Integer> stack = new Stack<>();
     stack.push(0);
     stack.push(size);
-    while(!stack.isEmpty()) {
+    while (!stack.isEmpty()) {
       int end = stack.pop();
       int start = stack.pop();
-      if(end - start < 2)
+      if (end - start < 2)
         continue;
       int p = start + ((end - start) / 2);
       p = partition(p, start, end);
-      
-      stack.push(p+1);
+
+      stack.push(p + 1);
       stack.push(end);
-      
+
       stack.push(start);
       stack.push(p);
     }
   }
-  
+
   private int partition(int pivot, int start, int end) {
     int l = start;
     int h = end - 2;
     Comparable pivObj = array[pivot];
     swap(pivot, end - 1);
-    
-    while(l < h) {
-      if(array[l].compareTo(pivObj) < 0)
+
+    while (l < h) {
+      if (array[l].compareTo(pivObj) < 0)
         l++;
       else if (array[h].compareTo(pivObj) >= 0)
         h--;
       else
-        swap(l,h);
+        swap(l, h);
     }
-    
+
     int index = h;
-    if(array[h].compareTo(pivObj) < 0)
+    if (array[h].compareTo(pivObj) < 0)
       index++;
-    
+
     swap(end - 1, index);
     return index;
   }
-  
+
   public void mergeSort() {
     Comparable[] tempArray = new Comparable[size];
     mergeSortRecurs(0, size - 1, tempArray);
   }
-  
+
   private void mergeSortRecurs(int lower, int higher, Comparable[] tempArray) {
-    if (lower < higher) {  // Only runs recursively when indices != or out of order
+    if (lower < higher) { // Only runs recursively when indices != or out of order
       int middle = lower + (higher - lower) / 2;
       mergeSortRecurs(lower, middle, tempArray);
       mergeSortRecurs(middle + 1, higher, tempArray);
       mergeParts(lower, middle, higher, tempArray);
     }
   }
-  
+
   private void mergeParts(int lower, int middle, int higher, Comparable[] tempArray) {
-    for(int i = lower; i <= higher; i++) {
+    for (int i = lower; i <= higher; i++) {
       tempArray[i] = array[i];
     }
     int i = lower;
     int j = middle + 1;
     int k = lower;
-    
-    while(i <= middle && j <= higher) {
-      if(tempArray[i].compareTo(tempArray[j]) <= 0) {
+
+    while (i <= middle && j <= higher) {
+      if (tempArray[i].compareTo(tempArray[j]) <= 0) {
         array[k] = tempArray[i];
         i++;
       } else {
@@ -480,40 +480,42 @@ public class ListArray {
       }
       k++;
     }
-    while(i <= middle) {
+    while (i <= middle) {
       array[k] = tempArray[i];
       k++;
       i++;
     }
   }
-  
+
   public void radixSort() {
     boolean cont = true;
     long divisor = 1L;
     Queue[] buckets = new LinkedList[10];
-    for(int i = 0; i < 10; i++) {
+    for (int i = 0; i < 10; i++) {
       buckets[i] = new LinkedList();
     }
-    
-    while(cont) {
+
+    while (cont) {
       cont = false;
-      for(int i = 0; i < size; i++) {
-        long hashIndex = ((int)array[i] / divisor) % 10;
-        if(hashIndex > 0) {
+      for (int i = 0; i < size; i++) {
+        long hashIndex = ((int) array[i] / divisor) % 10;
+        if (hashIndex > 0) {
           cont = true;
         }
-        buckets[(int)hashIndex].add(new Integer((Integer)array[i]));
+        buckets[(int) hashIndex].add(new Integer((Integer) array[i]));
       }
       divisor *= 10;
       int i = 0;
-      for(int j = 0; j < 10; j++) {
-        while(!buckets[j].isEmpty()) {
+      for (int j = 0; j < 10; j++) {
+        while (!buckets[j].isEmpty()) {
           Integer ival = (Integer) buckets[j].poll();
           array[i++] = ival.intValue();
         }
       }
     }
-    
+
   }
+
+
 
 }
