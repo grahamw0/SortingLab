@@ -1,8 +1,10 @@
 package arrayList;
 
 import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 import java.util.Stack;
 
@@ -313,6 +315,11 @@ public class ListArray {
    */
   public void setArray(Comparable[] array) {
     this.array = array;
+    int newSize = 0;
+    for (Comparable c : array) {
+      newSize++;
+    }
+    this.size = newSize;
   }
 
   /**
@@ -340,6 +347,9 @@ public class ListArray {
   }
 
   public void bubbleSort() {
+    if (size == 0) {
+      return;
+    }
     boolean swap = true;
     while (swap) {
       swap = false;
@@ -356,6 +366,9 @@ public class ListArray {
 
   // Not needed.
   public void selectionSort() {
+    if (size == 0) {
+      return;
+    }
     for (int i = 0; i < size; i++) {
       int min = i;
       for (int j = i; j < size; j++) {
@@ -368,6 +381,9 @@ public class ListArray {
   }
 
   public void insertionSort() {
+    if (size == 0) {
+      return;
+    }
     for (int i = 1; i < size; i++) {
       int j = i;
       Comparable c = array[i];
@@ -380,6 +396,9 @@ public class ListArray {
   }
 
   public void quickSortRecursive() {
+    if (size == 0) {
+      return;
+    }
     quickSortRecurs(0, size - 1);
   }
 
@@ -406,6 +425,9 @@ public class ListArray {
   }
 
   public void quickSortIterative() {
+    if (size == 0) {
+      return;
+    }
     Stack<Integer> stack = new Stack<>();
     stack.push(0);
     stack.push(size);
@@ -449,6 +471,9 @@ public class ListArray {
   }
 
   public void mergeSort() {
+    if (size == 0) {
+      return;
+    }
     Comparable[] tempArray = new Comparable[size];
     mergeSortRecurs(0, size - 1, tempArray);
   }
@@ -488,6 +513,9 @@ public class ListArray {
   }
 
   public void radixSort() {
+    if (size == 0) {
+      return;
+    }
     boolean cont = true;
     long divisor = 1L;
     Queue[] buckets = new LinkedList[10];
@@ -516,6 +544,44 @@ public class ListArray {
 
   }
 
+  public void bucketSort(int bucketSize) {
+    if (size == 0) { // TODO: Implement this in all other sorts
+      return;
+    }
 
+    Integer max = (Integer) array[0];
+    Integer min = (Integer) array[0];
+    for (int i = 1; i < size; i++) {
+      if ((Integer) array[i] < min) {
+        min = (Integer) array[i];
+      } else if ((Integer) array[i] > max) {
+        max = (Integer) array[i];
+      }
+    }
+
+    int bucketNum = (max - min) / bucketSize + 1;
+    List<List<Integer>> buckets = new ArrayList<List<Integer>>(bucketNum);
+    for (int i = 0; i < bucketNum; i++) {
+      buckets.add(new ArrayList<Integer>());
+    }
+
+    for (int i = 0; i < size; i++) {
+      buckets.get(((Integer) array[i] - min) / bucketSize).add((Integer) array[i]);
+    }
+
+    int index = 0;
+    for (int i = 0; i < buckets.size(); i++) {
+      // Integer[] bucketArray = new Integer[buckets.get(i).size()];
+      ListArray bucketArray = new ListArray();
+      // bucketArray = buckets.get(i).toArray(bucketArray);
+      bucketArray.setArray(buckets.get(i).toArray(new Comparable[0]));
+      // SORT BUCKETARRAY
+      bucketArray.quickSortIterative();
+      for (int j = 0; j < bucketArray.size; j++) {
+        array[index++] = bucketArray.get(j);
+      }
+    }
+
+  }
 
 }

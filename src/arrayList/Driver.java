@@ -17,17 +17,28 @@ public class Driver {
   public static void main(String[] args) {
     Random rand = new Random(666);
     ListArray list = new ListArray();
-    for(int i = 0; i < 20; i++) {
-      list.add(Math.abs(rand.nextInt()));
+    for(int i = 0; i < 5000000; i++) {
+      list.add(rand.nextInt(Integer.MAX_VALUE));
     }
+    /*list.add(8);
+    list.add(2);
+    list.add(5);
+    list.add(0);
+    list.add(1);
+    list.add(7);
+    list.add(4);
+    list.add(10);
+    list.add(6);
+    list.add(3);
+    list.add(9);*/
     //list.add(0);
     //list.add(0);
     //list.insertionSort();
     //list.partitionArrayExample(50);
     //list.quickSortRecursive();
-    //list.bucketSort();
+    list.bucketSort(10000);
     //list.mergeSort();
-    list.radixSort();
+    //list.radixSort();
     
     
     for(Comparable c : list.toArray()) {
