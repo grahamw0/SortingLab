@@ -432,6 +432,12 @@ public class AvlTree {
     }
   }
   
+  /**
+   * Takes in an array and creates a new tree.  Inserts, sorts, and 
+   * returns the tree in properly sorted format. 
+   * @param array The array of Integers to be sorted. 
+   * @return The tree in inOrder form.  
+   */
   public static ListArray treeSort(ListArray array) {
     AvlTree tree = new AvlTree();
     for(Comparable c : array.toArray()) {
