@@ -21,7 +21,7 @@ public class Driver {
    * and sort them.  When finished print the sorted tree.  
    * @param args
    */
-  public static void main(String[] args) {
+  public static void main(String[] args) { // Create random integers and add them to the ListArray.
     Random rand = new Random(666);
     ListArray list = new ListArray();
     for(int i = 0; i < 50; i++) {
