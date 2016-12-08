@@ -30,9 +30,9 @@ public class AvlTree {
   }
 
   /**
-   * Recursive insert method. Compares a node in the tree to the new node to either set the new
-   * node as a child of the current, or to recurse and move within the tree. The balancing method is
-   * then called.
+   * Recursive insert method. Compares a node in the tree to the new node to either set the new node
+   * as a child of the current, or to recurse and move within the tree. The balancing method is then
+   * called.
    * 
    * @param current The node currently being compared (should start w/ root)
    * @param insertNode The node to be inserted
@@ -431,19 +431,20 @@ public class AvlTree {
       return countRecur(node.getLeft(), x0, x1);
     }
   }
-  
+
   /**
-   * Takes in an array and creates a new tree.  Inserts, sorts, and 
-   * returns the tree in properly sorted format. 
-   * @param array The array of Integers to be sorted. 
-   * @return The tree in inOrder form.  
+   * Takes in an array and creates a new tree. Inserts, sorts, and returns the tree in properly
+   * sorted format.
+   * 
+   * @param array The array of Integers to be sorted.
+   * @return The tree in inOrder form.
    */
   public static ListArray treeSort(ListArray array) {
     AvlTree tree = new AvlTree();
-    for(Comparable c : array.toArray()) {
+    for (Comparable c : array.toArray()) {
       tree.insert(c);
     }
     return inOrder(tree);
-    
+
   }
 }

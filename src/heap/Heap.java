@@ -280,7 +280,7 @@ public class Heap {
   }
 
   /**
-   * Prints out the heap by row. 
+   * Prints out the heap by row.
    */
   public void print() {
     Queue<Node> queue = new LinkedList<Node>();
@@ -301,10 +301,11 @@ public class Heap {
   }
 
   /**
-   * Takes in an array and creates a new heap.  Inserts, sifts, and 
-   * returns the heap in properly sifted format. 
-   * @param array The array of Integers to be sorted. 
-   * @return The list.  
+   * Takes in an array and creates a new heap. Inserts, sifts, and returns the heap in properly
+   * sifted format.
+   * 
+   * @param array The array of Integers to be sorted.
+   * @return The list.
    */
   public static ListArray heapSort(ListArray array) {
     Heap heap = new Heap();

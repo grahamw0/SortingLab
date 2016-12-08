@@ -22,7 +22,8 @@ public class Node {
   }
 
   /**
-   * Constructor 
+   * Constructor
+   * 
    * @param data The data for the first node to hold
    */
   public Node(Comparable data) {
@@ -34,8 +35,9 @@ public class Node {
 
   /**
    * Constructor
+   * 
    * @param data The data for the first node to hold
-   * @param left_child 
+   * @param left_child
    * @param right_child
    * @param parent
    */
@@ -48,6 +50,7 @@ public class Node {
 
   /**
    * The getter for the left child
+   * 
    * @return the left child
    */
   public Node getLeftChild() {
@@ -56,6 +59,7 @@ public class Node {
 
   /**
    * The getter for the right child
+   * 
    * @return the right child
    */
   public Node getRightChild() {
@@ -64,6 +68,7 @@ public class Node {
 
   /**
    * Getter for the data contained in the node
+   * 
    * @return
    */
   public Comparable getData() {
@@ -72,6 +77,7 @@ public class Node {
 
   /**
    * Getter for the parent
+   * 
    * @return
    */
   public Node getParent() {
@@ -80,6 +86,7 @@ public class Node {
 
   /**
    * Setter for the left child
+   * 
    * @param left_child
    */
   public void setLeftChild(Node left_child) {
@@ -88,14 +95,16 @@ public class Node {
 
   /**
    * Setter for the right child
+   * 
    * @param right_child
    */
   public void setRightChild(Node right_child) {
     this.right_child = right_child;
   }
-  
+
   /**
    * Setter for the node's data
+   * 
    * @param data
    */
   public void setData(Comparable data) {
@@ -104,6 +113,7 @@ public class Node {
 
   /**
    * Setter for the parent
+   * 
    * @param parent
    */
   public void setParent(Node parent) {

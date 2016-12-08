@@ -350,41 +350,22 @@ public class ListArray {
    * Implementation of a bubble sort.
    */
   public void bubbleSort() {
-    if (size == 0) {
-      return;
-    }
-    boolean swap = true;
-    while (swap) {
-      swap = false;
-      for (int i = 0; i < size - 1; i++) {
-        if (array[i].compareTo(array[i + 1]) > 0) {
-          Comparable temp = array[i];
-          array[i] = array[i + 1];
-          array[i + 1] = temp;
-          swap = true;
+    int n = size;
+    do {
+      int newN = 0;
+      for (int i = 1; i < n - 1; i++) {
+        if (array[i - 1].compareTo(array[i]) > 0) {
+          swap(i - 1, i);
+          newN = i;
         }
       }
-    }
+      n = newN;
+    } while (n != 0);
   }
 
-  // Not needed.
-  public void selectionSort() {
-    if (size == 0) {
-      return;
-    }
-    for (int i = 0; i < size; i++) {
-      int min = i;
-      for (int j = i; j < size; j++) {
-        if (array[min].compareTo(array[j]) > 0) {
-          min = j;
-        }
-      }
-      swap(i, min);
-    }
-  }
 
   /**
-   * Implementation of insertion sort. 
+   * Implementation of insertion sort.
    */
   public void insertionSort() {
     if (size == 0) {
@@ -400,10 +381,10 @@ public class ListArray {
       array[j] = c;
     }
   }
-  
-/**
- * Calls on the recursive quick sort method.
- */
+
+  /**
+   * Calls on the recursive quick sort method.
+   */
   public void quickSortRecursive() {
     if (size == 0) {
       return;
@@ -413,6 +394,7 @@ public class ListArray {
 
   /**
    * Implementation of the quick sort using recursion.
+   * 
    * @param lower
    * @param higher
    */
@@ -464,8 +446,9 @@ public class ListArray {
   }
 
   /**
-   * Partition aids the iterative quick sort method.  
-   * @param pivot 
+   * Partition aids the iterative quick sort method.
+   * 
+   * @param pivot
    * @param start
    * @param end
    * @return The index
@@ -502,7 +485,8 @@ public class ListArray {
   }
 
   /**
-   * Implementation of the merge sort. 
+   * Implementation of the merge sort.
+   * 
    * @param lower
    * @param higher
    * @param tempArray
@@ -517,7 +501,8 @@ public class ListArray {
   }
 
   /**
-   * Sorts and merges the different smaller arrays that the mergeSortRecurs() creates.  
+   * Sorts and merges the different smaller arrays that the mergeSortRecurs() creates.
+   * 
    * @param lower
    * @param middle
    * @param higher
@@ -549,7 +534,7 @@ public class ListArray {
   }
 
   /**
-   * Implementation of the radix sort. 
+   * Implementation of the radix sort.
    */
   public void radixSort() {
     if (size == 0) {
@@ -583,45 +568,32 @@ public class ListArray {
 
   }
 
-  /**
-   * Implementation of the bucket sort. 
-   * @param bucketSize
-   */
-  public void bucketSort(int bucketSize) {
-    if (size == 0) { // TODO: Implement this in all other sorts
-      return;
-    }
-
-    Integer max = (Integer) array[0];
-    Integer min = (Integer) array[0];
-    for (int i = 1; i < size; i++) {
-      if ((Integer) array[i] < min) {
-        min = (Integer) array[i];
-      } else if ((Integer) array[i] > max) {
-        max = (Integer) array[i];
-      }
-    }
-
-    int bucketNum = (max - min) / bucketSize + 1;
-    List<List<Integer>> buckets = new ArrayList<List<Integer>>(bucketNum);
-    for (int i = 0; i < bucketNum; i++) {
-      buckets.add(new ArrayList<Integer>());
+  public void bucketSort() {
+    ListArray[] buckets = new ListArray[10];
+    for (int i = 0; i < 10; i++) {
+      buckets[i] = new ListArray();
     }
 
     for (int i = 0; i < size; i++) {
-      buckets.get(((Integer) array[i] - min) / bucketSize).add((Integer) array[i]);
+      int digits;
+      if ((Integer) array[i] < 0) {
+        digits = (Integer) array[i].toString().substring(1).length();
+      } else {
+        digits = (Integer) array[i].toString().length();
+      }
+      buckets[digits - 1].add(array[i]);
+
+    }
+
+    for (int i = 0; i < buckets.length; i++) {
+      buckets[i].quickSortRecursive();
     }
 
     int index = 0;
-    for (int i = 0; i < buckets.size(); i++) {
-      // Integer[] bucketArray = new Integer[buckets.get(i).size()];
-      ListArray bucketArray = new ListArray();
-      // bucketArray = buckets.get(i).toArray(bucketArray);
-      bucketArray.setArray(buckets.get(i).toArray(new Comparable[0]));
-      // SORT BUCKETARRAY
-      bucketArray.quickSortIterative();
-      for (int j = 0; j < bucketArray.size; j++) {
-        array[index++] = bucketArray.get(j);
+    for (int i = 0; i < buckets.length; i++) {
+      for (int j = 0; j < buckets[i].size; j++) {
+        array[index] = buckets[i].get(j);
+        index++;
       }
     }
 
