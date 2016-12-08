@@ -346,6 +346,9 @@ public class ListArray {
     }
   }
 
+  /**
+   * Implementation of a bubble sort.
+   */
   public void bubbleSort() {
     if (size == 0) {
       return;
@@ -380,6 +383,9 @@ public class ListArray {
     }
   }
 
+  /**
+   * Implementation of insertion sort. 
+   */
   public void insertionSort() {
     if (size == 0) {
       return;
@@ -394,7 +400,10 @@ public class ListArray {
       array[j] = c;
     }
   }
-
+  
+/**
+ * Calls on the recursive quick sort method.
+ */
   public void quickSortRecursive() {
     if (size == 0) {
       return;
@@ -402,7 +411,11 @@ public class ListArray {
     quickSortRecurs(0, size - 1);
   }
 
-
+  /**
+   * Implementation of the quick sort using recursion.
+   * @param lower
+   * @param higher
+   */
   private void quickSortRecurs(int lower, int higher) {
     if (higher <= lower || lower >= higher)
       return;
@@ -424,6 +437,9 @@ public class ListArray {
 
   }
 
+  /**
+   * Implementation of the quick sort using iteration.
+   */
   public void quickSortIterative() {
     if (size == 0) {
       return;
@@ -447,6 +463,13 @@ public class ListArray {
     }
   }
 
+  /**
+   * Partition aids the iterative quick sort method.  
+   * @param pivot 
+   * @param start
+   * @param end
+   * @return The index
+   */
   private int partition(int pivot, int start, int end) {
     int l = start;
     int h = end - 2;
@@ -478,6 +501,12 @@ public class ListArray {
     mergeSortRecurs(0, size - 1, tempArray);
   }
 
+  /**
+   * Implementation of the merge sort. 
+   * @param lower
+   * @param higher
+   * @param tempArray
+   */
   private void mergeSortRecurs(int lower, int higher, Comparable[] tempArray) {
     if (lower < higher) { // Only runs recursively when indices != or out of order
       int middle = lower + (higher - lower) / 2;
@@ -487,6 +516,13 @@ public class ListArray {
     }
   }
 
+  /**
+   * Sorts and merges the different smaller arrays that the mergeSortRecurs() creates.  
+   * @param lower
+   * @param middle
+   * @param higher
+   * @param tempArray
+   */
   private void mergeParts(int lower, int middle, int higher, Comparable[] tempArray) {
     for (int i = lower; i <= higher; i++) {
       tempArray[i] = array[i];
@@ -512,6 +548,9 @@ public class ListArray {
     }
   }
 
+  /**
+   * Implementation of the radix sort. 
+   */
   public void radixSort() {
     if (size == 0) {
       return;
@@ -544,6 +583,10 @@ public class ListArray {
 
   }
 
+  /**
+   * Implementation of the bucket sort. 
+   * @param bucketSize
+   */
   public void bucketSort(int bucketSize) {
     if (size == 0) { // TODO: Implement this in all other sorts
       return;

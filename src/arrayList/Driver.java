@@ -1,12 +1,12 @@
-/**
- * 
- */
+
 package arrayList;
 
 import java.util.Random;
 
 /**
- * @author grahamw0
+ * Driver page for all of the array-based sorting algorithms.
+ * 
+ * @author Will Graham, Ryan Godfrey
  *
  */
 public class Driver {
