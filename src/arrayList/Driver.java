@@ -24,6 +24,10 @@ public class Driver {
     endTime = System.currentTimeMillis();
     System.out.println("Insertion took: " + ((endTime - startTime) * .001));
 
+    list = new ListArray();
+    for (int i = 0; i < 5000000; i++) {
+      list.add(rand.nextInt(Integer.MAX_VALUE));
+    }
     startTime = System.currentTimeMillis();
     list.bubbleSort();
     endTime = System.currentTimeMillis();
