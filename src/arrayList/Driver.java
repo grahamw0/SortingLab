@@ -78,13 +78,6 @@ public class Driver {
     endTime = System.currentTimeMillis();
     System.out.println("Radix took: " + ((endTime - startTime) * .001));
 
-
-    /*
-     * for(Comparable c : list.toArray()) { System.out.println(c + " "); }
-     */
-    System.out.println("");
-    System.out.println("Ryan is the man!!!!");
-
   }
 
 }

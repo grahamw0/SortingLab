@@ -487,9 +487,9 @@ public class ListArray {
   /**
    * Implementation of the merge sort.
    * 
-   * @param lower
-   * @param higher
-   * @param tempArray
+   * @param lower lower index
+   * @param higher higher index
+   * @param tempArray the array
    */
   private void mergeSortRecurs(int lower, int higher, Comparable[] tempArray) {
     if (lower < higher) { // Only runs recursively when indices != or out of order
